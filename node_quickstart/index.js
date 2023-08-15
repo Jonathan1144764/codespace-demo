@@ -1,4 +1,5 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const app = express()
 const port = 3000
 
@@ -6,8 +7,10 @@ const { MongoClient } = require("mongodb");
 // Replace the uri string with your connection string.
 const uri = "mongodb://localhost:27017/?readPreference=primary&ssl=false&directConnection=true";
 
+app.use(bodyParser.json())
+
 app.post('/', (req, res) => {
-  console.log(req)
+  console.log(req.body)
   res.send('Hello World!');
   // const client = new MongoClient(uri);
 
