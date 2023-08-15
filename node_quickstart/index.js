@@ -31,7 +31,7 @@ app.post('/', (req, res) => {
     }
   }
   run().catch(console.dir);
-  res.send('Hello World!');
+  res.send(req.body);
 })
 
 app.listen(port, () => {
