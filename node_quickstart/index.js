@@ -11,24 +11,26 @@ app.use(bodyParser.json())
 
 app.post('/', (req, res) => {
   console.log(req.body)
-  res.send('Hello World!');
-  // const client = new MongoClient(uri);
+  
+  const client = new MongoClient(uri);
 
-  // async function run() {
-  //   try {
-  //     const database = client.db('mongodemo');
-  //     const student = database.collection('student');
+  async function run() {
+    try {
+      const database = client.db('mongodemo');
+      const student = database.collection('student');
 
-  //     // Query for a movie that has the title 'Back to the Future'
-  //     const query = [{ name: 'Charisse', age: 50000 }, {name: "Maryam", age: 100000}];
-  //     const result = await student.insertMany(query);
+      // Query for a movie that has the title 'Back to the Future'
+      // const query = [{ name: 'Charisse', age: 50000 }, {name: "Maryam", age: 100000}];
+      const result = await student.findOne(req.body);
 
-  //     console.log(result);
-  //   } finally {
-  //     // Ensures that the client will close when you finish/error
-  //     await client.close();
-  //   }
-  // }
+      console.log(result);
+      res.send('Hello World!');
+    } finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+  }
+  run().catch(console.dir);
 })
 
 app.listen(port, () => {
@@ -36,4 +38,3 @@ app.listen(port, () => {
 })
 
 
-// run().catch(console.dir);
