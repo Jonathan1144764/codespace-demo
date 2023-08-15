@@ -24,13 +24,14 @@ app.post('/', (req, res) => {
       const result = await student.findOne(req.body);
 
       console.log(result);
-      res.send('Hello World!');
+      
     } finally {
       // Ensures that the client will close when you finish/error
       await client.close();
     }
   }
   run().catch(console.dir);
+  res.send('Hello World!');
 })
 
 app.listen(port, () => {
