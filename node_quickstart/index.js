@@ -18,12 +18,14 @@ app.post('/', (req, res) => {
     try {
       const database = client.db('mongodemo');
       const student = database.collection('student');
+      const teacher = database.collection('teacher')
 
       // Query for a movie that has the title 'Back to the Future'
       // const query = [{ name: 'Charisse', age: 50000 }, {name: "Maryam", age: 100000}];
-      const result = await student.findOne(req.body);
+      const result = await student.updateOne({"name": "David"}, {$set: {"age": 20}});
+      const result2 = await teacher.findOne(req.body[1])
 
-      console.log(result);
+      console.log(result, result2);
       
     } finally {
       // Ensures that the client will close when you finish/error
@@ -31,7 +33,7 @@ app.post('/', (req, res) => {
     }
   }
   run().catch(console.dir);
-  res.send(req.body);
+  res.send("Request received");
 })
 
 app.listen(port, () => {
